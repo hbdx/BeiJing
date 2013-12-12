@@ -1,0 +1,2303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ABMWebservice" targetNamespace="http://server.ocs" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://server.ocs" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://server.ocs">
+      <xsd:element name="recharge">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="in0" type="tns:RechargeType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="rechargeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="rechargeReturn" type="tns:RechargeReturn"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+   
+      <xsd:complexType name="billInfoSetType">
+      	<xsd:sequence>
+
+      		<xsd:element name="accNbr" type="xsd:string"/>
+      		<xsd:element name="billCycle" type="xsd:string"/>
+      		<xsd:element name="billItemName" type="xsd:string"/>
+      		<xsd:element name="billItemId" type="xsd:string"/>
+      		<xsd:element name="billItemFee" type="xsd:string"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="accountQuery">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in0" type="tns:AccountQueryType"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="accountQueryResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="accountQueryReturn" type="tns:AccountQueryReturn"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="BalanceDetailType">
+      	<xsd:sequence>
+      		<xsd:element maxOccurs="unbounded" minOccurs="0" name="balanceInfo" type="tns:BalanceInfoType"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="BalanceInfoType">
+      	<xsd:sequence>
+      		<xsd:element name="balanceName" type="xsd:string"/>
+      		<xsd:element name="groupBalance" type="xsd:int"/>
+      		<xsd:element name="balance" type="xsd:int"/>
+      		<xsd:element maxOccurs="unbounded" minOccurs="0" name="balanceItem" type="tns:BalanceItemType"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getBalanceConferInfo">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in0" type="tns:GetBalanceConferInfoType"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getBalanceConferInfoResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+            	<xsd:element name="getBalanceReturnDetailReturn" type="tns:GetBalanceConferInfoReturn"/>
+            </xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="ReturnDetailType">
+      	<xsd:sequence>
+      		<xsd:element name="returnDate" type="xsd:string"/>
+      		<xsd:element name="factCharge" type="xsd:int"/>
+      		<xsd:element name="curPhase" type="xsd:int"/>
+      		<xsd:element name="countFormula" type="xsd:string"/>
+      		<xsd:element name="effDate" type="xsd:string"/>
+      		<xsd:element name="expDate" type="xsd:string"/>
+      		<xsd:element name="returnState" type="xsd:string"/>
+      		<xsd:element name="returnDesc" type="xsd:string"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="accountUsabilityQuery">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in0" type="tns:AccountUsabilityQueryType"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="accountUsabilityQueryResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="accountUsabilityQueryReturn" type="tns:AccountUsabilityQueryReturn"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="oweBillQuery">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in0" type="tns:OweBillQueryType"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="oweBillQueryResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="oweBillQueryReturn" type="tns:OweBillQueryReturn"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="getPaymentRecord">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in0" type="tns:GetPaymentRecordType"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPaymentRecordResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="getPaymentRecordReturn" type="tns:GetPaymentRecordReturn"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="paymentInfoSetType">
+      	<xsd:sequence>
+      		<xsd:element name="paySerialNbr" type="xsd:string"/>
+      		<xsd:element name="amount" type="xsd:string"/>
+      		<xsd:element name="accNbr" type="xsd:string"/>
+      		<xsd:element name="paymentDate" type="xsd:string"/>
+
+      		<xsd:element name="paymentMethod" type="xsd:string"/>
+      		<xsd:element name="channelName" type="xsd:string"/>
+      		<xsd:element name="due" type="xsd:string"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getCumulationInfo">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="in0" type="tns:GetCumulationInfoType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getCumulationInfoResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="getCumulationInfoReturn" type="tns:GetCumulationInfoReturn">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getBalanceConferInfoByMonth">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="in0" type="tns:GetBalanceConferInfoByMonthType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getBalanceConferInfoByMonthResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="getBalanceConferInfoByMonthReturn" type="tns:GetBalanceConferInfoByMonthReturn">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="doServValidate">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="in0" type="tns:DoServValidateType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="doServValidateResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="doServValidateReturn" type="tns:DoServValidateReturn">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getOweBill">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="in0" type="tns:GetOweBillType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getOweBillResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="getOweBillReturn " type="tns:GetOweBillReturn">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="oweBillInfoSetType">
+            	<xsd:sequence>
+            		<xsd:element name="billItemName" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="billItemFee" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+           
+    
+            <xsd:complexType name="cumulationInfoSetType">
+            	<xsd:sequence>
+            		<xsd:element name="offerName" type="xsd:string"/>
+            		<xsd:element name="accuName" type="xsd:string"/>
+            		<xsd:element name="startTime" type="xsd:string"/>
+            		<xsd:element name="endTime" type="xsd:string"/>
+            		<xsd:element name="unitName" type="xsd:string"/>
+            		<xsd:element name="total" type="xsd:string"/>
+            		<xsd:element name="already" type="xsd:string"/>
+            		<xsd:element name="left" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="BalanceItemType">
+            	<xsd:sequence>
+            		<xsd:element name="itemName" type="xsd:string"/>
+            		<xsd:element name="itemTotalBalance" type="xsd:int">
+            		</xsd:element>
+            		<xsd:element name="itemBalance" type="xsd:int"/>
+            		<xsd:element name="useAccNbr" type="xsd:string"/>
+            		<xsd:element name="useLimitItem" type="xsd:string"/>
+            		<xsd:element name="attr" type="xsd:int"/>
+            		<xsd:element name="balanceAttrId" type="xsd:int"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="ActiveDetailType">
+            	<xsd:sequence>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="activeInfo" type="tns:ActiveInfoType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="ActiveInfoType">
+            	<xsd:sequence>
+            		<xsd:element name="groupBalance" type="xsd:int"/>
+            		<xsd:element name="activeBalance" type="xsd:int"/>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="activeItem" type="tns:ActiveItemType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="ActiveItemType">
+            	<xsd:sequence>
+            		<xsd:element name="returnInstId" type="xsd:int"/>
+            		<xsd:element name="activeName" type="xsd:string"/>
+            		<xsd:element name="returnRule" type="xsd:string"/>
+            		<xsd:element name="totalCharge" type="xsd:int"/>
+            		<xsd:element name="totalPhases" type="xsd:int"/>
+            		<xsd:element name="sumEffCharge" type="xsd:int"/>
+            		<xsd:element name="sumExpCharge" type="xsd:int"/>
+            		<xsd:element name="restEffCharge" type="xsd:int"/>
+            		<xsd:element name="beginTime" type="xsd:string"/>
+            		<xsd:element name="nextTime" type="xsd:string"/>
+            		<xsd:element name="useLimitItem" type="xsd:string"/>
+            		<xsd:element name="useAccNbr" type="xsd:string"/>
+            		<xsd:element name="attr" type="xsd:int"/>
+            		<xsd:element name="balanceAttrId" type="xsd:int"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="refreshPara">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="in0" type="tns:RefreshParaType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="refreshParaResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="refreshParaReturn" type="tns:RefreshParaReturnType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="AccountQueryType">
+           		<xsd:all>
+	            	<xsd:element name="requestId" type="xsd:string"/>
+	      			<xsd:element name="requestTime" type="xsd:string"/>
+	      			<xsd:element name="objType" type="xsd:string"/>
+	      			<xsd:element name="obj" type="xsd:string"/>
+	      			<xsd:element name="queryFlag" type="xsd:string"/>
+	      			<xsd:element name="detailFlag" type="xsd:string"/>
+	      			<xsd:element name="interfaceId" type="xsd:string"/>
+	      		</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="AccountQueryReturn">
+            	<xsd:sequence>
+            		<xsd:element name="responseId" type="xsd:string"/>
+	      			<xsd:element name="responseTime" type="xsd:string"/>
+	      			<xsd:element name="result" type="xsd:string"/>
+	      			<xsd:element name="errorCode" type="xsd:string"/>
+	      			<xsd:element name="errorMessage" type="xsd:string"/>
+	      			<xsd:element name="totalBalance" type="xsd:int"/>
+	      			<xsd:element name="normalBalance" type="xsd:int"/>
+	      			<xsd:element name="specBalance" type="xsd:int"/>
+	      			<xsd:element name="charge" type="xsd:int"/>
+	      			<xsd:element name="realCharge" type="xsd:int"/>
+	      			<xsd:element name="amount" type="xsd:int"/>
+	      			<xsd:element name="validDate" type="xsd:string"/>
+	      			<xsd:element maxOccurs="1" minOccurs="0" name="balanceDetail" type="tns:BalanceDetailType">
+	      			</xsd:element>
+	      			<xsd:element maxOccurs="1" minOccurs="0" name="activeDetail" type="tns:ActiveDetailType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="AccountUsabilityQueryType">
+            	<xsd:all>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+      				<xsd:element name="requestTime" type="xsd:string"/>
+      				<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="AccountUsabilityQueryReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+	      			<xsd:element name="errorCode" type="xsd:string"/>
+	      			<xsd:element name="errorMessage" type="xsd:string"/>
+	      			<xsd:element name="balance" type="xsd:int"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="DoServValidateType">
+            	<xsd:all>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            		<xsd:element name="payType" type="xsd:int"/>
+            	</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="DoServValidateReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            			</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+          
+
+            <xsd:complexType name="GetCumulationInfoType">
+            	<xsd:all>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="requestTime" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="interfaceId" type="xsd:string">
+            			</xsd:element>
+            	</xsd:all>
+            </xsd:complexType>
+    
+            <xsd:complexType name="GetPaymentRecordType">
+            	<xsd:all>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+	      			<xsd:element name="requestTime" type="xsd:string"/>
+	      			<xsd:element name="beginDate" type="xsd:string"/>
+	      			<xsd:element name="endDate" type="xsd:string"/>
+	      			<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="GetPaymentRecordReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+	      			<xsd:element name="errorCode" type="xsd:string"/>
+	      			<xsd:element name="errorMessage" type="xsd:string"/>
+	      			<xsd:element name="count" type="xsd:int"/>
+	      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="paymentInfoSet" type="tns:paymentInfoSetType">
+	      			</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="OweBillQueryType">
+            	<xsd:all>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+	      			<xsd:element name="feeQueryFlag" type="xsd:string"/>
+	      			<xsd:element name="flag" type="xsd:string"/>
+	      			<xsd:element name="requestTime" type="xsd:string"/>
+	      			<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="OweBillQueryReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+	      			<xsd:element name="errorCode" type="xsd:string"/>
+	      			<xsd:element name="errorMessage" type="xsd:string"/>
+	      			<xsd:element name="totalAmount" type="xsd:int"/>
+	      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="billInfoSet" type="tns:billInfoSetType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="RechargeType">
+            	<xsd:all>
+            		<xsd:element name="requestSerial" type="xsd:string"/>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="agentCode" type="xsd:string"/>
+            		<xsd:element name="rechargeAmount" type="xsd:int"/>
+            		<xsd:element name="invoiceFlag" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            		<xsd:element name="useFlag" type="xsd:int"/>
+            		<xsd:element name="staffId" type="xsd:string"/>
+            		<xsd:element name="method" type="xsd:int"/>
+            		<xsd:element name="methodInfo" type="xsd:string"/>
+            	</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="RechargeReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+		          	<xsd:element name="errorCode" type="xsd:string"/>
+		          	<xsd:element name="errorMessage" type="xsd:string"/>
+		          	<xsd:element name="paymentId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="GetBalanceConferInfoType">
+            	<xsd:all>
+            		<xsd:element name="requestId" type="xsd:string"/>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="returnInstId" type="xsd:int"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="GetBalanceConferInfoReturn">
+            	<xsd:sequence>
+            		<xsd:element name="responseId" type="xsd:string"/>
+	      			<xsd:element name="responseTime" type="xsd:string"/>
+	      			<xsd:element name="result" type="xsd:string"/>
+	      			<xsd:element name="errorCode" type="xsd:string"/>
+	      			<xsd:element name="errorMessage" type="xsd:string"/>
+	      			<xsd:element name="retrunDetailCnt" type="xsd:int"/>
+	      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="returnDetail" type="tns:ReturnDetailType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="GetCumulationInfoReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="cumulationInfoSet" type="tns:cumulationInfoSetType">
+            			</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="GetBalanceConferInfoByMonthType">
+            	<xsd:all>
+            		<xsd:element name="requestId" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="requestTime" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="objType" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="destinationId" type="xsd:string">
+            		</xsd:element>
+
+            		<xsd:element name="queryFlag" type="xsd:string"/>
+            		<xsd:element name="month" type="xsd:int">
+            		</xsd:element>
+            		<xsd:element name="interfaceId" type="xsd:string">
+            		</xsd:element>
+            	</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="GetBalanceConferInfoByMonthReturn">
+            	<xsd:sequence>
+            		<xsd:element name="responseId" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="responseTime" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="result" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="errorCode" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="conferInfo" type="tns:conferInfoType">
+            			</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="GetOweBillType">
+            	<xsd:all>
+            		<xsd:element name="valueType" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="feeQueryFlag" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="value" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="billingCycle" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="interfaceId" type="xsd:string">
+            			</xsd:element>
+            	</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="GetOweBillReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="count" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="billInfoSet" type="tns:oweBillInfoSetType">
+            			</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="qryIsOwe">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="in0" type="tns:QryIsOweType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="qryIsOweResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="qryIsOweReturn" type="tns:QryIsOweReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="QryIsOweType">
+            	<xsd:all>
+            		<xsd:element name="servId" type="xsd:long"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:all>
+            </xsd:complexType>
+    
+            <xsd:complexType name="QryIsOweReturn">
+            	<xsd:sequence>
+            		<xsd:element name="resultCode" type="xsd:string"/>
+            		<xsd:element name="oweFlag" type="xsd:int"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="qryCreditValue">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:QryCreditValueType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="qryCreditValueResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="qryCreditValueReturn" type="tns:QryCreditValueReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="QryCreditValueType">
+            	<xsd:all>
+            		<xsd:element name="servId" type="xsd:long"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:all>
+            </xsd:complexType>
+    
+            <xsd:complexType name="QryCreditValueReturn">
+            	<xsd:sequence>
+            		<xsd:element name="resultCode" type="xsd:string"/>
+            		<xsd:element name="creditValue" type="xsd:int"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="qryWriteoffAmount">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:QryWriteoffAmountType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="qryWriteoffAmountResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="qryWriteoffAmountReturn" type="tns:QryWriteoffAmountReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="QryWriteoffAmountType">
+            	<xsd:all>
+            		<xsd:element name="instanceId" type="xsd:long"/>
+
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:all>
+            </xsd:complexType>
+            
+            <xsd:complexType name="QryWriteoffAmountReturn">
+            	<xsd:sequence>
+            		<xsd:element name="resultCode" type="xsd:string"/>
+            		<xsd:element name="writeOffAmount" type="xsd:int"/>
+            		<xsd:element name="payFee" type="xsd:int"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            
+            <xsd:element name="balanceTransfer">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:BalanceTransferType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="balanceTransferResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="balanceTransferReturn" type="tns:BalanceTransferReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="BalanceTransferType">
+            	<xsd:all>
+            		<xsd:element name="servId" type="xsd:long"/>
+            		<xsd:element name="acctNbr97" type="xsd:string"/>
+            		<xsd:element name="amount" type="xsd:int"/>
+            		<xsd:element name="manageCode" type="xsd:long"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:all>
+            </xsd:complexType>
+            
+            <xsd:complexType name="BalanceTransferReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:int"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMsg" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="RefreshParaType">
+            	<xsd:all>
+            		<xsd:element name="RequestTime" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="interfaceId" type="xsd:string">
+            			</xsd:element>
+            	</xsd:all>
+            </xsd:complexType>
+        
+            <xsd:complexType name="RefreshParaReturnType">
+            	<xsd:sequence>
+            		<xsd:element name="ResponseTime" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="Result" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="ErrorCode" type="xsd:string">
+            			</xsd:element>
+            		<xsd:element name="ErrorMessage" type="xsd:string">
+            			</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="conferInfoType">
+            	<xsd:sequence>
+            		<xsd:element name="activeName" type="xsd:string"/>
+            		<xsd:element name="balanceType" type="xsd:int"/>
+            		<xsd:element name="factCharge" type="xsd:int"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="prepayBackRoll">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:PrepayBackRollType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="prepayBackRollResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="prepayBackRollReturn" type="tns:PrepayBackRollReturnType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="PrepayBackRollType">
+            	<xsd:sequence>
+            		<xsd:element name="requestId" type="xsd:string"/>
+            		<xsd:element name="oldrequestId" type="xsd:string"/>
+            		<xsd:element name="instanceId" type="xsd:long"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="PrepayBackRollReturnType">
+            	<xsd:sequence>
+            		<xsd:element name="resultCode" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="prepayCanBack">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:PrepayCanBackType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="prepayCanBackResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="prepayCanBackReturn" type="tns:PrepayCanBackReturnType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="PrepayCanBackType">
+            	<xsd:sequence>
+            		<xsd:element name="servId" type="xsd:string"/>
+            		<xsd:element name="acctId" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="PrepayCanBackReturnType">
+            	<xsd:sequence>
+            		<xsd:element name="resultcode" type="xsd:string"/>
+            		<xsd:element name="backflag" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="transBalanceQuery">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:TransBalanceQueryType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="transBalanceQueryResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="transBalanceQueryReturn" type="tns:TransBalanceQueryReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="TransBalanceQueryType">
+            	<xsd:sequence>
+            		<xsd:element name="servId" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="TransBalanceQueryReturn">
+            	<xsd:sequence>
+            		<xsd:element name="resultCode" type="xsd:string"/>
+            		<xsd:element name="balance" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="canPresentBalanceQuery">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:CanPresentBalanceQueryType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="canPresentBalanceQueryResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="canPresentBalanceQueryReturn" type="tns:CanPresentBalanceQueryReturnType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="balancePresent">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:BalancePresentType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="balancePresentResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="balancePresentReturn" type="tns:BalancePresentReturnType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="balancePresentLog">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:BalancePresentLogType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="balancePresentLogResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="balancePresentLogReturn" type="tns:BalancePresentLogReturnType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="CanPresentBalanceQueryType">
+            	<xsd:sequence>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+                    <xsd:element name="operFlag" type="xsd:string"/>
+                    <xsd:element name="interfaceId" type="xsd:string"/>
+
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="CanPresentBalanceQueryReturnType">
+            	<xsd:sequence>
+            		<xsd:element name="totalBalance" type="xsd:long"/>
+            		<xsd:element name="presentedBalance" type="xsd:long"/>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="BalancePresentType">
+            	<xsd:sequence>
+        			<xsd:element name="accNbr" type="xsd:string"/>
+        			<xsd:element name="preAccNbr" type="xsd:string"/>
+
+        			<xsd:element name="balance" type="xsd:long"/>
+        			<xsd:element name="interfaceId" type="xsd:string"/>
+        		</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="BalancePresentReturnType">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="BalancePresentLogType">
+            	<xsd:sequence>
+        			<xsd:element name="accNbr" type="xsd:string"/>
+        			<xsd:element name="month" type="xsd:string"/>
+        			<xsd:element name="interfaceId" type="xsd:string"/>
+        		</xsd:sequence>
+            </xsd:complexType>
+        
+            <xsd:complexType name="BalancePresentLogReturnType">
+            	<xsd:sequence>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="logItem" type="tns:logItemType">
+            		</xsd:element>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="logItemType">
+            	<xsd:sequence>
+        			<xsd:element name="serialId" type="xsd:string"/>
+        			<xsd:element name="accNbr" type="xsd:string"/>
+        			<xsd:element name="preAccNbr" type="xsd:string"/>
+        			<xsd:element name="amount" type="xsd:string"/>
+        			<xsd:element name="preTime" type="xsd:string"/>
+        		</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="getServInfo">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:GetServInfoType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getServInfoResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="getServInfoReturn" type="tns:GetServInfoReturnType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="GetServInfoType">
+            	<xsd:sequence>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="GetServInfoReturnType">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="realCharge" type="xsd:int"/>
+            		<xsd:element name="creditValue" type="xsd:int"/>
+            		<xsd:element name="curBalance" type="xsd:int"/>
+            		<xsd:element name="paymentInfoCount" type="xsd:int">
+            		</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="paymentInfoSet" type="tns:PaymentInfoSetType1">
+            		</xsd:element>
+            		<xsd:element name="servimmuInfoCount" type="xsd:int">
+            		</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="servimmuInfoSet" type="tns:ServimmuInfoSetType">
+            		</xsd:element>
+            		<xsd:element name="billInfoCount" type="xsd:int"/>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="billInfoSet" type="tns:BillInfoSetType1">
+            		</xsd:element>
+
+            		<xsd:element name="totalAmount" type="xsd:int"/>
+            		<xsd:element name="paymentMethod" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="PaymentInfoSetType1">
+            	<xsd:sequence>
+            		<xsd:element name="billingCycle" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="amount" type="xsd:long"/>
+
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="ServimmuInfoSetType">
+            	<xsd:sequence>
+            		<xsd:element name="operType" type="xsd:string"/>
+            		<xsd:element name="effDate" type="xsd:string"/>
+            		<xsd:element name="expDate" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="BillInfoSetType1">
+            	<xsd:sequence>
+            		<xsd:element name="billingCycle" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="amount" type="xsd:long"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="Usabilitycharge">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:UsabilitychargeType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="UsabilitychargeResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="usabilitychargeReturn" type="tns:UsabilitychargeReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="UsabilitychargeType">
+            	<xsd:sequence>
+            		<xsd:element name="requestSerial" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="agentCode" type="xsd:string"/>
+            		<xsd:element name="rechargeAmount" type="xsd:int"/>
+            		<xsd:element name="invoiceFlag" type="xsd:string"/>
+            		<xsd:element name="useFlag" type="xsd:string"/>
+            		<xsd:element name="managecode" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            
+            <xsd:complexType name="UsabilitychargeReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="paymentId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="prepayBack">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:PrepayBackType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="prepayBackResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="prepayBackReturn" type="tns:PrepayBackReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+        
+            <xsd:complexType name="PrepayBackType">
+            	<xsd:sequence>
+            		<xsd:element name="requestId" type="xsd:string"/>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="servId" type="xsd:string"/>
+            		<xsd:element name="acctId" type="xsd:string"/>
+            		<xsd:element name="instanceId" type="xsd:long"/>
+            		<xsd:element name="usedflag" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            		<xsd:element name="type" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="PrepayBackReturn">
+            	<xsd:sequence>
+            		<xsd:element name="resultCode" type="xsd:string"/>
+            		<xsd:element name="balance" type="xsd:long"/>
+            		<xsd:element name="usedPresent" type="xsd:long"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="getCurrentMonthBillDetail">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:GetCurrentMonthBillDetailType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getCurrentMonthBillDetailResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="GetCurrentMonthBillDetailReturn" type="tns:GetCurrentMonthBillDetailReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="GetCurrentMonthBillDetailType">
+            	<xsd:sequence>
+            		<xsd:element name="requestId" type="xsd:string"/>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="AccNbr" type="xsd:string"/>
+            		<xsd:element name="queryFlag" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="GetCurrentMonthBillDetailReturn">
+            	<xsd:sequence>
+            		<xsd:element name="responseId" type="xsd:string"/>
+            		<xsd:element name="responseTime" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="responseAmount" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="BillDetailSet" type="tns:BillDetail">
+            		</xsd:element>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="BillDetail">
+            	<xsd:sequence>
+            		<xsd:element name="AcctId" type="xsd:string"/>
+            		<xsd:element name="ServId" type="xsd:string"/>
+            		<xsd:element name="BillCycleId" type="xsd:string"/>
+            		<xsd:element name="ItemCode" type="xsd:string"/>
+            		<xsd:element name="Fee" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="indentInvoiceNumQry">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:IndentInvoiceNumQryType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="indentInvoiceNumQryResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="indentInvoiceNumQryReturn" type="tns:IndentInvoiceNumQryReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="IndentInvoiceNumQryType">
+            	<xsd:sequence>
+            		<xsd:element name="requestId" type="xsd:string"/>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="platId" type="xsd:string"/>
+            		<xsd:element name="cycleId" type="xsd:int"/>
+            		<xsd:element name="staffId" type="xsd:string"/>
+            		<xsd:element name="invoiceType" type="xsd:int"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="IndentInvoiceNumQryReturn">
+            	<xsd:sequence>
+            		<xsd:element name="responseId" type="xsd:string"/>
+            		<xsd:element name="responseTime" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="result" type="xsd:int"/>
+            		<xsd:element name="invoiceNbr" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="indentInvoicePrint">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:IndentInvoicePrintType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="indentInvoicePrintResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="indentInvoicePrintReturn" type="tns:IndentInvoicePrintReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="IndentInvoicePrintType">
+            	<xsd:sequence>
+            		<xsd:element name="requestId" type="xsd:string"/>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="paymentId" type="xsd:string"/>
+            		<xsd:element name="accountMonth" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="staffId" type="xsd:string"/>
+            		<xsd:element name="printType" type="xsd:int"/>
+            		<xsd:element name="invoiceType" type="xsd:int"/>
+            		<xsd:element name="invoiceId" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="IndentInvoicePrintReturn">
+            	<xsd:sequence>
+            		<xsd:element name="responseId" type="xsd:string"/>
+            		<xsd:element name="responseTime" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="paymentId" type="xsd:string"/>
+            		<xsd:element name="result" type="xsd:int"/>
+            		<xsd:element maxOccurs="unbounded" minOccurs="1" name="invoiceLists" type="tns:InvoiceListType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="InvoiceListType">
+            	<xsd:sequence>
+            		<xsd:element maxOccurs="unbounded" minOccurs="1" name="invoiceItem" type="tns:InvoiceItemType">
+            		</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="1" name="invoiceTxt" type="tns:InvoiceTxtType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="InvoiceItemType">
+            	<xsd:sequence>
+            		<xsd:element name="item" type="xsd:string"/>
+            		<xsd:element name="value" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="InvoiceTxtType">
+            	<xsd:sequence>
+            		<xsd:element name="itemCode" type="xsd:string"/>
+            		<xsd:element name="value" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="qryImmuntyInfo">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:QryImmuntyInfoType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="qryImmuntyInfoResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="qryImmuntyInfoReturn" type="tns:QryImmuntyInfoReturn">
+            			</xsd:element>
+
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="QryImmuntyInfo">
+            	<xsd:sequence>
+            		<xsd:element name="NewElement" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="QryImmuntyInfoType">
+            	<xsd:sequence>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="QryImmuntyInfoReturnType"/>
+        
+            <xsd:complexType name="QryImmuntyInfoReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+
+
+
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="servimmuInfoSet" type="tns:ServimmuInfoSetType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="queryIVcCardRequest">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:QueryIVcCardRequestType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="queryIVcCardResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="queryIVcCardReturn" type="tns:QueryIVcCardReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="QueryIVcCardRequestType">
+            	<xsd:sequence>
+            		<xsd:element name="requestSerial" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="QueryIVcCardReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="payment_mode" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="ivccard_flag" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="forceActiveRequest">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:ForceActiveRequestType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="forceActiveResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="forceActiveReturn" type="tns:ForceActiveReturn">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="ForceActiveRequestType">
+            	<xsd:sequence>
+            		<xsd:element name="operType" type="xsd:int"/>
+            		<xsd:element name="requestTime" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            		<xsd:element maxOccurs="unbounded" minOccurs="1" name="item" type="tns:ItemType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="ItemType">
+            	<xsd:sequence>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="ForceActiveReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ItemTypeReturn"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="ItemTypeReturn">
+            	<xsd:sequence>
+            		<xsd:element name="accNbr" type="xsd:string"/>
+            		<xsd:element name="errorMsg" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="updateCertificateFlagRequest">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:UpdateCertificateFlagType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateCertificateFlagResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="updateCertificateFlagReturn" type="tns:UpdateCertificateFlagResponseType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="UpdateCertificateFlagType">
+            	<xsd:sequence>
+            		<xsd:element name="custId" type="xsd:string"/>
+            		<xsd:element name="servId" type="xsd:string"/>
+            		<xsd:element name="acc_nbr" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="UpdateCertificateFlagResponseType">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMsg" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="qryServBlockInfoRequest">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:QryServBlockInfoType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="qryServBlockInfoResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="qryServBlockInfoReturn" type="tns:QryServBlockInfoReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="QryServBlockInfoType">
+            	<xsd:sequence>
+            		<xsd:element name="servId" type="xsd:string"/>
+            		<xsd:element name="beginDate" type="xsd:string"/>
+            		<xsd:element name="endDate" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="QryServBlockInfoReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="servBlockInfoSet" type="tns:ServBlockInfoSet"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="ServBlockInfoSet">
+            	<xsd:sequence>
+            		<xsd:element name="partitionIdBlock" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="blockDate" type="xsd:string"/>
+            		<xsd:element name="staffName" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="qryExtDataInfoRequest">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="in0" type="tns:QryExtDataInfoRequestType"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="qryExtDataInfoResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+            			<xsd:element name="qryExtDataInfoReturn" type="tns:QryExtDataInfoReturn"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:complexType name="QryExtDataInfoRequestType">
+            	<xsd:sequence>
+            		<xsd:element name="acctId" type="xsd:string"/>
+            		<xsd:element name="beginMonth" type="xsd:string"/>
+            		<xsd:element name="endMonth" type="xsd:string"/>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="QryExtDataInfoReturn">
+            	<xsd:sequence>
+            		<xsd:element name="result" type="xsd:string"/>
+            		<xsd:element name="errorCode" type="xsd:string"/>
+            		<xsd:element name="errorMessage" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element maxOccurs="unbounded" minOccurs="0" name="extDataInfoSet" type="tns:ExtDataInfoSet"/>
+
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="ExtDataInfoSet">
+            	<xsd:sequence>
+            		<xsd:element name="charge" type="xsd:string"/>
+            		<xsd:element name="billingCycleId" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="state" type="xsd:string"/>
+            		<xsd:element name="createDate" type="xsd:string"/>
+            		<xsd:element name="operDate" type="xsd:string"/>
+            		<xsd:element name="paymentDay" type="xsd:string"/>
+            		<xsd:element name="printFlag" type="xsd:string"/>
+            		<xsd:element name="collectInfo" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="rechargeForTmall">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+
+
+
+
+
+
+
+
+
+            			<xsd:element name="in0" type="tns:RechargeForTmallType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rechargeForTmallResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+
+
+
+
+
+            			<xsd:element name="isp" type="tns:RechargeForTmallReturn">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+    
+            <xsd:complexType name="RechargeForTmallType">
+            	<xsd:sequence>
+            		<xsd:element name="sign" type="xsd:string"/>
+            		<xsd:element name="sign_type " type="xsd:string"/>
+            		<xsd:element name="alipay_order_id" type="xsd:long">
+            		</xsd:element>
+            		<xsd:element name="order_status" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="tb_order_id" type="xsd:long"/>
+            		<xsd:element name="out_order_id" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="seller_alipay_id" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="deduct_money " type="xsd:long">
+            		</xsd:element>
+            		<xsd:element name="order_pay_time" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="interfaceId" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+        
+            <xsd:complexType name="RechargeForTmallReturn">
+            	<xsd:sequence>
+            		<xsd:element name="is_succes" type="xsd:string"/>
+            		<xsd:element name="error" type="xsd:string"/>
+            		<xsd:element name="sign_type" type="xsd:string"/>
+            		<xsd:element name="sign" type="xsd:string"/>
+            		<xsd:element maxOccurs="1" minOccurs="0" name="response" type="tns:RechargeForTmallResponseType"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    
+            <xsd:complexType name="RechargeForTmallResponseType">
+            	<xsd:sequence>
+            		<xsd:element name="tb_order_id" type="xsd:long"/>
+            		<xsd:element name="out_order_id" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="alipay_order_no" type="xsd:long">
+            		</xsd:element>
+            		<xsd:element name="deduct_money" type="xsd:long"/>
+            		<xsd:element name="seller_alipay_id" type="xsd:string">
+            		</xsd:element>
+            		<xsd:element name="order_status" type="xsd:string"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="qryWriteoffAmountResponse">
+    <wsdl:part name="parameters" element="tns:qryWriteoffAmountResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="forceActiveRequest">
+    <wsdl:part name="parameters" element="tns:forceActiveRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="accountUsabilityQuery">
+    <wsdl:part name="parameters" element="tns:accountUsabilityQuery">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getServInfoResponse">
+    <wsdl:part name="parameters" element="tns:getServInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getBalanceConferInfoByMonthResponse">
+    <wsdl:part name="parameters" element="tns:getBalanceConferInfoByMonthResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="balancePresentRequest">
+    <wsdl:part name="parameters" element="tns:balancePresent">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="balancePresentLogResponse">
+    <wsdl:part name="parameters" element="tns:balancePresentLogResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryCreditValueResponse">
+    <wsdl:part name="parameters" element="tns:qryCreditValueResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryIVcCardRequest">
+    <wsdl:part name="parameters" element="tns:queryIVcCardRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOweBillResponse">
+    <wsdl:part name="parameters" element="tns:getOweBillResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="recharge">
+    <wsdl:part name="parameters" element="tns:recharge">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="prepayBackRollRequest">
+    <wsdl:part name="parameters" element="tns:prepayBackRoll">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="balancePresentLogRequest">
+    <wsdl:part name="parameters" element="tns:balancePresentLog">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="doServValidateResponse">
+    <wsdl:part name="parameters" element="tns:doServValidateResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryImmuntyInfoResponse">
+    <wsdl:part name="parameters" element="tns:qryImmuntyInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="prepayBackResponse">
+    <wsdl:part name="parameters" element="tns:prepayBackResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="queryIVcCardResponse">
+    <wsdl:part name="parameters" element="tns:queryIVcCardResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getServInfoRequest">
+    <wsdl:part name="parameters" element="tns:getServInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="balanceTransferRequest">
+    <wsdl:part name="parameters" element="tns:balanceTransfer">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryExtDataInfoResponse">
+    <wsdl:part name="parameters" element="tns:qryExtDataInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="prepayBackRollResponse">
+    <wsdl:part name="parameters" element="tns:prepayBackRollResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="canPresentBalanceQueryResponse">
+    <wsdl:part name="parameters" element="tns:canPresentBalanceQueryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="refreshParaResponse">
+    <wsdl:part name="parameters" element="tns:refreshParaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="prepayBackRequest">
+    <wsdl:part name="parameters" element="tns:prepayBack">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryExtDataInfoRequest">
+    <wsdl:part name="parameters" element="tns:qryExtDataInfoRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryServBlockInfoResponse">
+    <wsdl:part name="parameters" element="tns:qryServBlockInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="accountQueryResponse">
+    <wsdl:part name="parameters" element="tns:accountQueryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryIsOweRequest">
+    <wsdl:part name="parameters" element="tns:qryIsOwe">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="accountUsabilityQueryResponse">
+    <wsdl:part name="parameters" element="tns:accountUsabilityQueryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPaymentRecordResponse">
+    <wsdl:part name="parameters" element="tns:getPaymentRecordResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rechargeResponse">
+    <wsdl:part name="parameters" element="tns:rechargeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transBalanceQueryResponse">
+    <wsdl:part name="parameters" element="tns:transBalanceQueryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCumulationInfo">
+    <wsdl:part name="parameters" element="tns:getCumulationInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="indentInvoiceNumQryRequest">
+    <wsdl:part name="parameters" element="tns:indentInvoiceNumQry">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="oweBillQueryResponse">
+    <wsdl:part name="parameters" element="tns:oweBillQueryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryWriteoffAmountRequest">
+    <wsdl:part name="parameters" element="tns:qryWriteoffAmount">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rechargeForTmallResponse">
+    <wsdl:part name="parameters" element="tns:rechargeForTmallResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCumulationInfoResponse">
+    <wsdl:part name="parameters" element="tns:getCumulationInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOweBill">
+    <wsdl:part name="parameters" element="tns:getOweBill">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCertificateFlagRequest">
+    <wsdl:part name="parameters" element="tns:updateCertificateFlagRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="indentInvoiceNumQryResponse">
+    <wsdl:part name="parameters" element="tns:indentInvoiceNumQryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCurrentMonthBillDetailResponse">
+  </wsdl:message>
+  <wsdl:message name="rechargeForTmallRequest">
+    <wsdl:part name="parameters" element="tns:rechargeForTmall">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCertificateFlagResponse">
+    <wsdl:part name="parameters" element="tns:updateCertificateFlagResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getBalanceConferInfoResponse">
+    <wsdl:part name="parameters" element="tns:getBalanceConferInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryImmuntyInfoRequest">
+    <wsdl:part name="parameters" element="tns:qryImmuntyInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transBalanceQueryRequest">
+    <wsdl:part name="parameters" element="tns:transBalanceQuery">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="oweBillQuery">
+    <wsdl:part name="parameters" element="tns:oweBillQuery">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="indentInvoicePrintResponse">
+    <wsdl:part name="parameters" element="tns:indentInvoicePrintResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UsabilitychargeRequest">
+    <wsdl:part name="parameters" element="tns:Usabilitycharge">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPaymentRecord">
+    <wsdl:part name="parameters" element="tns:getPaymentRecord">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="balancePresentResponse">
+    <wsdl:part name="parameters" element="tns:balancePresentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="indentInvoicePrintRequest">
+    <wsdl:part name="parameters" element="tns:indentInvoicePrint">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="balanceTransferResponse">
+    <wsdl:part name="parameters" element="tns:balanceTransferResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="forceActiveResponse">
+    <wsdl:part name="parameters" element="tns:forceActiveResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UsabilitychargeResponse">
+    <wsdl:part name="parameters" element="tns:UsabilitychargeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="refreshPara">
+    <wsdl:part name="parameters" element="tns:refreshPara">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="doServValidate">
+    <wsdl:part name="parameters" element="tns:doServValidate">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="accountQuery">
+    <wsdl:part name="parameters" element="tns:accountQuery">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCurrentMonthBillDetailRequest">
+  </wsdl:message>
+  <wsdl:message name="qryCreditValueRequest">
+    <wsdl:part name="parameters" element="tns:qryCreditValue">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryServBlockInfoRequest">
+    <wsdl:part name="parameters" element="tns:qryServBlockInfoRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="prepayCanBackRequest">
+    <wsdl:part name="parameters" element="tns:prepayCanBack">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getBalanceConferInfo">
+    <wsdl:part name="parameters" element="tns:getBalanceConferInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="qryIsOweResponse">
+    <wsdl:part name="parameters" element="tns:qryIsOweResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="canPresentBalanceQueryRequest">
+    <wsdl:part name="parameters" element="tns:canPresentBalanceQuery">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getBalanceConferInfoByMonth">
+    <wsdl:part name="parameters" element="tns:getBalanceConferInfoByMonth">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="prepayCanBackResponse">
+    <wsdl:part name="parameters" element="tns:prepayCanBackResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ABMWebservice">
+    <wsdl:operation name="recharge">
+      <wsdl:input message="tns:recharge">
+    </wsdl:input>
+      <wsdl:output message="tns:rechargeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="accountQuery">
+      <wsdl:input message="tns:accountQuery">
+    </wsdl:input>
+      <wsdl:output message="tns:accountQueryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBalanceConferInfo">
+      <wsdl:input message="tns:getBalanceConferInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:getBalanceConferInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="accountUsabilityQuery">
+      <wsdl:input message="tns:accountUsabilityQuery">
+    </wsdl:input>
+      <wsdl:output message="tns:accountUsabilityQueryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="oweBillQuery">
+      <wsdl:input message="tns:oweBillQuery">
+    </wsdl:input>
+      <wsdl:output message="tns:oweBillQueryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentRecord">
+      <wsdl:input message="tns:getPaymentRecord">
+    </wsdl:input>
+      <wsdl:output message="tns:getPaymentRecordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCumulationInfo">
+      <wsdl:input message="tns:getCumulationInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:getCumulationInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBalanceConferInfoByMonth">
+      <wsdl:input message="tns:getBalanceConferInfoByMonth">
+    </wsdl:input>
+      <wsdl:output message="tns:getBalanceConferInfoByMonthResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doServValidate">
+      <wsdl:input message="tns:doServValidate">
+    </wsdl:input>
+      <wsdl:output message="tns:doServValidateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOweBill">
+      <wsdl:input message="tns:getOweBill">
+    </wsdl:input>
+      <wsdl:output message="tns:getOweBillResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refreshPara">
+      <wsdl:input message="tns:refreshPara">
+    </wsdl:input>
+      <wsdl:output message="tns:refreshParaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryIsOwe">
+      <wsdl:input message="tns:qryIsOweRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:qryIsOweResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryCreditValue">
+      <wsdl:input message="tns:qryCreditValueRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:qryCreditValueResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryWriteoffAmount">
+      <wsdl:input message="tns:qryWriteoffAmountRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:qryWriteoffAmountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="balanceTransfer">
+      <wsdl:input message="tns:balanceTransferRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:balanceTransferResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="prepayCanBack">
+      <wsdl:input message="tns:prepayCanBackRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:prepayCanBackResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transBalanceQuery">
+      <wsdl:input message="tns:transBalanceQueryRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:transBalanceQueryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="canPresentBalanceQuery">
+      <wsdl:input message="tns:canPresentBalanceQueryRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:canPresentBalanceQueryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="balancePresent">
+      <wsdl:input message="tns:balancePresentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:balancePresentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="balancePresentLog">
+      <wsdl:input message="tns:balancePresentLogRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:balancePresentLogResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServInfo">
+      <wsdl:input message="tns:getServInfoRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getServInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Usabilitycharge">
+      <wsdl:input message="tns:UsabilitychargeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UsabilitychargeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="prepayBack">
+      <wsdl:input message="tns:prepayBackRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:prepayBackResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="indentInvoiceNumQry">
+      <wsdl:input message="tns:indentInvoiceNumQryRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:indentInvoiceNumQryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="indentInvoicePrint">
+      <wsdl:input message="tns:indentInvoicePrintRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:indentInvoicePrintResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryImmuntyInfo">
+      <wsdl:input message="tns:qryImmuntyInfoRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:qryImmuntyInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryIVcCard">
+      <wsdl:input message="tns:queryIVcCardRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:queryIVcCardResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="forceActive">
+      <wsdl:input message="tns:forceActiveRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:forceActiveResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCertificateFlag">
+      <wsdl:input message="tns:updateCertificateFlagRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateCertificateFlagResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryServBlockInfo">
+      <wsdl:input message="tns:qryServBlockInfoRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:qryServBlockInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryExtDataInfo">
+      <wsdl:input message="tns:qryExtDataInfoRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:qryExtDataInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechargeForTmall">
+      <wsdl:input message="tns:rechargeForTmallRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:rechargeForTmallResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ABMWebserviceSOAP" type="tns:ABMWebservice">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="recharge">
+      <soap:operation soapAction="http://server.ocs/recharge"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="oweBillQuery">
+      <soap:operation soapAction="http://server.ocs/oweBillQuery"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="accountQuery">
+      <soap:operation soapAction="http://server.ocs/accountQuery"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBalanceConferInfo">
+      <soap:operation soapAction="http://server.ocs/getBalanceConferInfo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="accountUsabilityQuery">
+      <soap:operation soapAction="http://server.ocs/accountUsabilityQuery"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPaymentRecord">
+      <soap:operation soapAction="http://server.ocs/getPaymentRecord"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCumulationInfo">
+      <soap:operation soapAction="http://server.ocs/getCumulationInfo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBalanceConferInfoByMonth">
+      <soap:operation soapAction="http://server.ocs/getBalanceConferInfoByMonth"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doServValidate">
+      <soap:operation soapAction="http://server.ocs/doServValidate"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOweBill">
+      <soap:operation soapAction="http://server.ocs/getOweBill"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refreshPara">
+      <soap:operation soapAction="http://server.ocs/refreshPara"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryIsOwe">
+      <soap:operation soapAction="http://server.ocs/qryIsOwe"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryCreditValue">
+      <soap:operation soapAction="http://server.ocs/qryCreditValue"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryWriteoffAmount">
+      <soap:operation soapAction="http://server.ocs/qryWriteoffAmount"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="balanceTransfer">
+      <soap:operation soapAction="http://server.ocs/balanceTransfer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="prepayCanBack">
+      <soap:operation soapAction="http://server.ocs/PrepayCanBack"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transBalanceQuery">
+      <soap:operation soapAction="http://server.ocs/transBalanceQuery"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="canPresentBalanceQuery">
+      <soap:operation soapAction="http://server.ocs/canPresentBalanceQuery"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="balancePresent">
+      <soap:operation soapAction="http://server.ocs/balancePresent"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="balancePresentLog">
+      <soap:operation soapAction="http://server.ocs/balancePresentLog"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServInfo">
+      <soap:operation soapAction="http://server.ocs/getServInfo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Usabilitycharge">
+      <soap:operation soapAction="http://server.ocs/usabilitycharge"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="prepayBack">
+      <soap:operation soapAction="http://server.ocs/prepayBack"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="indentInvoiceNumQry">
+      <soap:operation soapAction="http://server.ocs/indentInvoiceNumQry"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="indentInvoicePrint">
+      <soap:operation soapAction="http://server.ocs/indentInvoicePrint"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryImmuntyInfo">
+      <soap:operation soapAction="http://server.ocs/qryImmuntyInfo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryIVcCard">
+      <soap:operation soapAction="http://server.ocs/queryIVcCard"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="forceActive">
+      <soap:operation soapAction="http://server.ocs/forceActive"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCertificateFlag">
+      <soap:operation soapAction="http://server.ocs/updateCertificateFlag"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryServBlockInfo">
+      <soap:operation soapAction="http://server.ocs/qryServBlockInfo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryExtDataInfo">
+      <soap:operation soapAction="http://server.ocs/qryExtDataInfo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechargeForTmall">
+      <soap:operation soapAction="http://server.ocs/rechargeForTmall"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ABMWebservice">
+    <wsdl:port name="ABMWebserviceSOAP" binding="tns:ABMWebserviceSOAP">
+      <soap:address location="http://server.ocs"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
